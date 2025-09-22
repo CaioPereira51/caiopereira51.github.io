@@ -1,7 +1,6 @@
 <template>
-  <section>
-    <h2 class="mb-3">Projetos</h2>
-    <h3 class="titulo-projetos">Projetos:</h3>
+  <section aria-labelledby="projetos-heading">
+    <h2 id="projetos-heading" class="titulo-projetos">Meus Projetos</h2>
     <div v-if="loading" class="col-12 text-center text-500">Carregando projetos do GitHub...</div>
     <div v-else-if="erro" class="col-12 text-center text-danger">Erro ao carregar projetos.</div>
     <div v-else class="projetos-grid">
@@ -36,7 +35,8 @@ const erro = ref(false);
 const username = 'CaioPereira51'; // Substitua pelo seu usuário do GitHub
 
 function abrirRepositorio(url) {
-  window.open(url, '_blank');
+  const link = window.open(url, '_blank', 'noopener,noreferrer');
+  if (!link) link.rel = 'noopener noreferrer';
 }
 
 onMounted(async () => {

@@ -1,12 +1,12 @@
 <template>
-  <section>
-    <h2 class="titulo-skills">Experiência Profissional:</h2>
+  <section aria-labelledby="experiencia-heading">
+    <h2 id="experiencia-heading" class="titulo-skills">Experiência Profissional</h2>
     <div class="experience-list">
       <Card v-for="(item, index) in experiencias" :key="index" class="experience-card">
         <template #content>
           <div class="flex p-4">
             <div class="company-logo-side">
-              <img :src="getLogoUrl('ws.png')" :alt="item.empresa" class="logo-img-side">
+              <img :src="getLogoUrl('ws.png')" :alt="item.empresa" class="logo-img-side" loading="lazy">
             </div>
             <div class="flex-1 pl-5">
               <div class="font-bold text-xl mb-3 text-white">{{ item.empresa }}</div>

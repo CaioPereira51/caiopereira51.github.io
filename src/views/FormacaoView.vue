@@ -1,13 +1,13 @@
 <template>
   <div class="formacao-container">
-    <section>
-      <h2 class="titulo-skills">Formação Acadêmica:</h2>
+    <section aria-labelledby="formacao-heading">
+      <h2 id="formacao-heading" class="titulo-skills">Formação Acadêmica</h2>
       <div class="formation-list">
         <Card v-for="(item, index) in experienciasAcademicas" :key="index" class="formation-card">
           <template #content>
             <div class="flex p-4">
               <div class="company-logo-side">
-                <img :src="getLogoUrlAcademica(item.logo)" :alt="item.instituicao" class="logo-img-side">
+                <img :src="getLogoUrlAcademica(item.logo)" :alt="item.instituicao" class="logo-img-side" loading="lazy">
               </div>
               <div class="flex-1 pl-5">
                 <div class="font-bold text-xl mb-3 text-white">{{ item.instituicao }}</div>
@@ -19,7 +19,7 @@
         </Card>
       </div>
 
-      <h2 class="titulo-skills mt-6">Outras Formações:</h2>
+      <h3 class="titulo-skills mt-6">Certificações e Cursos</h3>
       <div class="carousel-container">
         <Carousel 
           v-if="certificados && certificados.length > 0" 
@@ -40,6 +40,7 @@
                     :src="getCertificateUrl(slotProps.data.image)" 
                     :alt="slotProps.data.name" 
                     class="w-full rounded certificate-image" 
+                    loading="lazy"
                     @error="handleImageError"
                   />
                 </div>

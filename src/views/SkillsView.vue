@@ -1,7 +1,6 @@
 <template>
-  <section>
-    <h2 class="mb-3">Skills & Tech Stack</h2>
-    <h3 class="titulo-skills">Skills:</h3>
+  <section aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="titulo-skills">Skills & Tech Stack</h2>
     <div class="grid gap-3">
       <div class="col-6 md:col-3" v-for="skill in skills" :key="skill.name">
         <div class="surface-card border-round shadow-1 p-3 flex flex-column align-items-center">

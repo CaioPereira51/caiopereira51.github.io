@@ -3,12 +3,12 @@
     <div class="sobre-content">
       <div class="sobre-card-img">
         <div class="img-card">
-          <img src="/programador.png" alt="Ilustração programador" class="avatar-ilustra" />
+          <img src="/programador.png" alt="Ilustração programador" class="avatar-ilustra" loading="lazy" />
         </div>
       </div>
       <div class="sobre-info">
         <h1 class="sobre-titulo">Caio Pereira</h1>
-        <h2 class="sobre-subtitulo">Desenvolvedor FullStack</h2>
+        <p class="sobre-subtitulo" role="doc-subtitle">Desenvolvedor FullStack</p>
         <p class="descricao mb-4">
           Sou programador full stack, apaixonado por tecnologia e especializado em análise e desenvolvimento de sistemas. 
           Possuo sólida experiência na criação de soluções inovadoras e eficientes, aliando qualidade técnica a visão estratégica. 
@@ -37,13 +37,15 @@ import curriculoUrl from '../assets/Caio_Pereira_programador_2025.pdf';
 // Funções para abrir links externos
 const openGitHub = () => {
   if (typeof window !== 'undefined') {
-    window.open('https://github.com/CaioPereira51', '_blank');
+    const link = window.open('https://github.com/CaioPereira51', '_blank', 'noopener,noreferrer');
+    if (!link) link.rel = 'noopener noreferrer';
   }
 };
 
 const openLinkedIn = () => {
   if (typeof window !== 'undefined') {
-    window.open('https://www.linkedin.com/in/caiopereira51/', '_blank');
+    const link = window.open('https://www.linkedin.com/in/caiopereira51/', '_blank', 'noopener,noreferrer');
+    if (!link) link.rel = 'noopener noreferrer';
   }
 };
 
@@ -55,13 +57,15 @@ const openEmail = () => {
 
 const openWhatsApp = () => {
   if (typeof window !== 'undefined') {
-    window.open('https://wa.me/5537999567472', '_blank');
+    const link = window.open('https://wa.me/5537999567472', '_blank', 'noopener,noreferrer');
+    if (!link) link.rel = 'noopener noreferrer';
   }
 };
 
 const openCurriculo = () => {
   if (typeof window !== 'undefined') {
-    window.open(curriculoUrl, '_blank');
+    const link = window.open(curriculoUrl, '_blank', 'noopener,noreferrer');
+    if (!link) link.rel = 'noopener noreferrer';
   }
 };
 </script>

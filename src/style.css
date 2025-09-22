@@ -28,12 +28,12 @@ a, .text-primary {
 }
 
 .p-button-primary, .p-button.p-button-primary {
-  background: var(--accent-color) !important;
+  background: var(--accent-color);
   border: none;
-  color: var(--text-light) !important;
+  color: var(--text-light);
 }
 .p-button-primary:hover, .p-button.p-button-primary:hover {
-  background: #265bb5 !important;
+  background: #265bb5;
 }
 
 .section, .full-section {
@@ -45,7 +45,7 @@ a, .text-primary {
 }
 
 .surface-card, .card {
-  background: rgba(27, 42, 65, 0.92) !important;
+  background: rgba(27, 42, 65, 0.92);
   color: var(--secondary-color);
   border-radius: var(--border-radius);
   box-shadow: var(--card-shadow);
@@ -57,27 +57,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .p-button, .social-btn {
-  color: var(--accent-color) !important;
-  background: transparent !important;
-  border: 2px solid var(--accent-color) !important;
+  color: var(--accent-color);
+  background: transparent;
+  border: 2px solid var(--accent-color);
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
 /* Garante que o texto interno do botão acompanhe a cor do botão (inclusive no hover) */
 .p-button .p-button-label {
-  color: inherit !important;
+  color: inherit;
 }
 
 .p-button.p-button-primary, .botao-cv {
-  background: transparent !important;
-  color: var(--accent-color) !important;
-  border: 2px solid var(--accent-color) !important;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
 }
 
 .p-button.p-button-primary:hover, .botao-cv:hover, .p-button:hover, .social-btn:hover {
-  background: var(--accent-color) !important;
-  color: var(--text-light) !important;
-  border: 2px solid var(--accent-color) !important;
+  background: var(--accent-color);
+  color: var(--text-light);
+  border: 2px solid var(--accent-color);
 }
 
 .social-btn {
