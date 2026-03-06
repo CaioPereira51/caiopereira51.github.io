@@ -1,99 +1,152 @@
 :root {
-  --primary-color: #040615; /* Azul escuro - 60% */
-  --secondary-color: #EAEAEA; /* Cinza claro - 30% */
-  --accent-color: #3A86FF;   /* Azul vibrante - 10% */
-  --border-radius: 12px;
-  --navbar-bg: var(--primary-color);
-  --card-bg: var(--secondary-color);
-  --card-shadow: 0 2px 16px 0 #1b2a4111;
-  --text-title: var(--primary-color);
-  --text-base: #1B2A41;
-  --text-light: #fff;
+  --primary-color: #040615;
+  --secondary-color: #eaeaea;
+  --accent-color: #3a86ff;
+  --accent-color-strong: #265bc9;
+  --text-light: #ffffff;
+  --text-base: #dce3f4;
+  --text-muted: #a0aec8;
+  --surface-panel: rgba(15, 24, 42, 0.78);
+  --surface-elevated: rgba(27, 42, 65, 0.92);
+  --surface-overlay: rgba(8, 14, 28, 0.97);
+  --border-subtle: rgba(140, 167, 219, 0.26);
+  --border-radius: 16px;
+  --card-shadow: 0 14px 36px rgba(2, 8, 24, 0.3);
+  --nav-offset: 96px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--primary-color);
 }
 
 body {
-  background: var(--primary-color);
-  color: var(--secondary-color);
-  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(58, 134, 255, 0.2), transparent 45%),
+    radial-gradient(circle at 88% 12%, rgba(95, 175, 255, 0.18), transparent 36%),
+    linear-gradient(180deg, #040615 0%, #060a1b 58%, #040615 100%);
+  color: var(--text-base);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
 }
 
-.navbar {
-  background: var(--navbar-bg) !important;
+a {
+  color: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
   color: var(--text-light);
-  box-shadow: 0 2px 8px 0 #1b2a4111;
+  line-height: 1.2;
 }
 
-a, .text-primary {
-  color: var(--accent-color) !important;
-}
-
-.p-button-primary, .p-button.p-button-primary {
-  background: var(--accent-color);
-  border: none;
-  color: var(--text-light);
-}
-.p-button-primary:hover, .p-button.p-button-primary:hover {
-  background: #265bb5;
-}
-
-.section, .full-section {
-  background: var(--primary-color);
-  border-radius: var(--border-radius);
-  margin-bottom: 2rem;
-  color: var(--secondary-color);
-  border-bottom: 3px solid var(--accent-color);
-}
-
-.surface-card, .card {
-  background: rgba(27, 42, 65, 0.92);
-  color: var(--secondary-color);
+.section-shell {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--border-radius);
   box-shadow: var(--card-shadow);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-title);
+.section-heading {
+  margin-bottom: 1.8rem;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 3.8vw, 2.65rem);
   font-weight: 700;
-}
-
-.p-button, .social-btn {
-  color: var(--accent-color);
-  background: transparent;
-  border: 2px solid var(--accent-color);
-  transition: background 0.2s, color 0.2s, border 0.2s;
-}
-
-/* Garante que o texto interno do botão acompanhe a cor do botão (inclusive no hover) */
-.p-button .p-button-label {
-  color: inherit;
-}
-
-.p-button.p-button-primary, .botao-cv {
-  background: transparent;
-  color: var(--accent-color);
-  border: 2px solid var(--accent-color);
-}
-
-.p-button.p-button-primary:hover, .botao-cv:hover, .p-button:hover, .social-btn:hover {
-  background: var(--accent-color);
   color: var(--text-light);
-  border: 2px solid var(--accent-color);
 }
 
-.social-btn {
-  background: var(--accent-color);
-  color: var(--text-light) !important;
+.section-subtitle {
+  margin-top: 0.65rem;
+  max-width: 62ch;
+  color: var(--text-muted);
 }
 
-.social-btn:hover {
-  background: var(--primary-color);
-  color: var(--text-light) !important;
+.surface-card,
+.card {
+  background: var(--surface-elevated) !important;
+  color: var(--text-base) !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--card-shadow) !important;
+}
+
+.p-button,
+.p-button.p-button-primary {
+  border-radius: 10px;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.p-button:hover,
+.p-button.p-button-primary:hover {
+  transform: translateY(-1px);
+}
+
+.p-button:focus-visible,
+.p-button.p-button-primary:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
+  background: rgba(58, 134, 255, 0.55);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--secondary-color);
+  background: rgba(4, 6, 21, 0.9);
 }

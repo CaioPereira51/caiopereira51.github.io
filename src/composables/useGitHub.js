@@ -1,32 +1,36 @@
 import { ref } from 'vue';
 import { fetchRepos } from '../services/github';
 
-export function useGitHub(username) {
+export function useGitHub(username, options = {}) {
+  const perPage = options.perPage ?? 12;
   const repos = ref([]);
-  const loading = ref(false);
-  const error = ref(null);
+  const loading = ref(true);
+  const error = ref('');
 
   const loadRepos = async () => {
     if (!username) {
-      error.value = 'Nome de usuário é obrigatório';
+      error.value = 'Nome de usuário é obrigatório.';
+      repos.value = [];
+      loading.value = false;
       return;
     }
 
     loading.value = true;
-    error.value = null;
-    
+    error.value = '';
+
     try {
-      repos.value = await fetchRepos(username);
+      const data = await fetchRepos(username, perPage);
+      repos.value = data.filter((repo) => !repo.fork && !repo.archived);
     } catch (err) {
-      error.value = err.message || 'Erro ao carregar repositórios do GitHub';
-      console.error('Erro ao buscar repositórios:', err);
+      error.value = err.message || 'Erro ao carregar repositórios do GitHub.';
+      repos.value = [];
     } finally {
       loading.value = false;
     }
   };
 
   const retry = () => {
-    loadRepos();
+    return loadRepos();
   };
 
   return {

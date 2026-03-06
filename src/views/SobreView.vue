@@ -1,254 +1,219 @@
 <template>
-  <section class="sobre-hero">
-    <div class="sobre-content">
+  <section class="sobre-hero" aria-labelledby="sobre-nome">
+    <article class="sobre-content section-shell">
       <div class="sobre-card-img">
-        <div class="img-card">
-          <img src="/programador.png" alt="Ilustração programador" class="avatar-ilustra" loading="lazy" />
-        </div>
+        <img
+          src="/programador.png"
+          alt="Ilustração de desenvolvedor em ambiente de programação"
+          class="avatar-ilustra"
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
+
       <div class="sobre-info">
-        <h1 class="sobre-titulo">Caio Pereira</h1>
-        <p class="sobre-subtitulo" role="doc-subtitle">Desenvolvedor FullStack</p>
-        <p class="descricao mb-4">
-          Sou programador full stack, apaixonado por tecnologia e especializado em análise e desenvolvimento de sistemas. 
-          Possuo sólida experiência na criação de soluções inovadoras e eficientes, aliando qualidade técnica a visão estratégica. 
-          Com habilidades avançadas em programação, mantenho-me em constante atualização para superar desafios tecnológicos e contribuir 
-          ativamente para o crescimento e a excelência dos resultados da empresa.
+        <p class="sobre-kicker">Desenvolvedor FullStack</p>
+        <h1 id="sobre-nome" class="sobre-titulo">Caio Pereira</h1>
+        <p class="sobre-subtitulo">Construo soluções web com foco em qualidade, clareza e resultado.</p>
+        <p class="descricao">
+          Sou programador full stack apaixonado por tecnologia e especializado em análise e desenvolvimento
+          de sistemas. Tenho experiência na criação de soluções eficientes, unindo visão técnica, foco no
+          usuário e melhoria contínua para entregar valor real ao negócio.
         </p>
-        <div class="botoes-sociais mt-4">
-          <button @click="openGitHub" class="social-btn" aria-label="GitHub" type="button"><i class="pi pi-github"></i></button>
-          <button @click="openLinkedIn" class="social-btn" aria-label="LinkedIn" type="button"><i class="pi pi-linkedin"></i></button>
-          <button @click="openEmail" class="social-btn" aria-label="E-mail" type="button"><i class="pi pi-envelope"></i></button>
-          <button @click="openWhatsApp" class="social-btn" aria-label="WhatsApp" type="button"><i class="pi pi-whatsapp"></i></button>
-          <button @click="openCurriculo" class="p-button p-button-primary p-button-lg botao-cv" type="button">
-            <span class="p-button-label">Baixar Currículo</span>
-            <i class="pi pi-download ml-2"></i>
-          </button>
+
+        <div class="botoes-sociais">
+          <a
+            v-for="link in socialLinks"
+            :key="link.label"
+            :href="link.href"
+            class="social-btn"
+            :target="link.target"
+            :rel="link.target === '_blank' ? 'noopener noreferrer' : undefined"
+            :aria-label="link.label"
+          >
+            <i :class="link.icon" aria-hidden="true"></i>
+            <span class="sr-only">{{ link.label }}</span>
+          </a>
+
+          <a
+            :href="curriculoUrl"
+            class="botao-cv"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Baixar currículo em PDF"
+          >
+            <span>Baixar Currículo</span>
+            <i class="pi pi-download" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
-    </div>
+    </article>
   </section>
 </template>
 
 <script setup>
-// Importar o currículo
 import curriculoUrl from '../assets/Caio_Pereira_programador_2025.pdf';
+import { useSocialLinks } from '../composables/useSocialLinks';
 
-// Funções para abrir links externos
-const openGitHub = () => {
-  if (typeof window !== 'undefined') {
-    const link = window.open('https://github.com/CaioPereira51', '_blank', 'noopener,noreferrer');
-    if (!link) link.rel = 'noopener noreferrer';
-  }
-};
+const { getEmailUrl, getGitHubUrl, getLinkedInUrl, getWhatsAppUrl } = useSocialLinks();
 
-const openLinkedIn = () => {
-  if (typeof window !== 'undefined') {
-    const link = window.open('https://www.linkedin.com/in/caiopereira51/', '_blank', 'noopener,noreferrer');
-    if (!link) link.rel = 'noopener noreferrer';
-  }
-};
-
-const openEmail = () => {
-  if (typeof window !== 'undefined') {
-    window.open('mailto:dev.caiop@gmail.com');
-  }
-};
-
-const openWhatsApp = () => {
-  if (typeof window !== 'undefined') {
-    const link = window.open('https://wa.me/5537999567472', '_blank', 'noopener,noreferrer');
-    if (!link) link.rel = 'noopener noreferrer';
-  }
-};
-
-const openCurriculo = () => {
-  if (typeof window !== 'undefined') {
-    const link = window.open(curriculoUrl, '_blank', 'noopener,noreferrer');
-    if (!link) link.rel = 'noopener noreferrer';
-  }
-};
+const socialLinks = [
+  { label: 'GitHub', href: getGitHubUrl(), icon: 'pi pi-github', target: '_blank' },
+  { label: 'LinkedIn', href: getLinkedInUrl(), icon: 'pi pi-linkedin', target: '_blank' },
+  { label: 'E-mail', href: getEmailUrl(), icon: 'pi pi-envelope', target: '_self' },
+  { label: 'WhatsApp', href: getWhatsAppUrl(), icon: 'pi pi-whatsapp', target: '_blank' },
+];
 </script>
 
 <style scoped>
 .sobre-hero {
-  min-height: 70vh;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sobre-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 80vw;
-  max-width: 1400px;
-  min-width: 320px;
-  margin: 0 auto;
-  gap: 3rem;
-  background: rgba(27, 42, 65, 0.92) !important;
-  border-radius: 24px;
-  box-shadow: 0 6px 32px 0 #1b2a4133;
-  border: 2px solid #232c3b;
-  padding: 2.5rem 2rem;
-}
-.sobre-card-img {
-  flex: 1 1 0;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-}
-.img-card {
-  background: transparent;
-  border-radius: 18px;
-  box-shadow: none;
-  padding: 0;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
   width: 100%;
-  height: 100%;
 }
+
+.sobre-content {
+  display: grid;
+  grid-template-columns: minmax(260px, 38%) 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+  width: min(1120px, 100%);
+  padding: clamp(1.25rem, 2.4vw, 2.4rem);
+}
+
+.sobre-card-img {
+  min-height: 100%;
+}
+
 .avatar-ilustra {
   width: 100%;
   height: 100%;
-  max-width: none;
+  min-height: 320px;
   max-height: 520px;
   object-fit: cover;
-  border-radius: 18px;
-  background: transparent;
-  border: 4px solid var(--primary-color);
-  box-shadow: 0 2px 12px 0 #2563eb22;
-  display: block;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 12px 24px rgba(6, 10, 26, 0.28);
 }
+
 .sobre-info {
-  flex: 1 1 0;
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  gap: 0.95rem;
 }
-.sobre-titulo {
-  font-size: 2.5rem;
-  font-weight: 800;
+
+.sobre-kicker {
   color: var(--accent-color);
-  margin-bottom: 0.1em;
-}
-.sobre-subtitulo {
-  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--secondary-color);
-  margin-bottom: 1.2rem;
-  margin-top: 0;
 }
+
+.sobre-titulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+}
+
+.sobre-subtitulo {
+  font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
 .descricao {
-  font-size: 1.3rem;
-  color: var(--secondary-color);
-  max-width: 520px;
+  max-width: 62ch;
+  color: var(--text-base);
+  font-size: clamp(1rem, 1.7vw, 1.08rem);
 }
+
 .botoes-sociais {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 0.8rem;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 0.55rem;
 }
+
 .social-btn {
   width: 44px;
   height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0;
-  display: flex;
+  border-radius: 999px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50% !important;
-  background: var(--accent-color);
-  color: var(--text-light) !important;
-  font-size: 1.5rem;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 2px 8px 0 #3a86ff22;
-  border: 2px solid var(--accent-color) !important;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-light);
+  background: rgba(58, 134, 255, 0.2);
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
+
 .social-btn:hover {
-  background: var(--primary-color);
-  color: var(--text-light) !important;
+  transform: translateY(-2px);
+  background: var(--accent-color);
 }
+
+.social-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.social-btn i {
+  font-size: 1.2rem;
+}
+
 .botao-cv {
-  font-size: 1.1rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 10px;
-  margin-left: 0.5rem;
-  display: flex;
+  margin-left: 0.15rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: var(--accent-color) !important;
-  color: var(--text-light) !important;
-  border: none;
-  transition: background 0.2s, color 0.2s;
+  gap: 0.55rem;
+  background: var(--accent-color);
+  color: var(--text-light);
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
+
 .botao-cv:hover {
-  background: #265bb5 !important;
-  color: var(--text-light) !important;
+  transform: translateY(-2px);
+  background: var(--accent-color-strong);
 }
-/* Forçar a cor do rótulo interno do botão, pois .p-button-label global define cor com !important */
-.botao-cv .p-button-label {
-  color: var(--text-light) !important;
-  border: none !important;
+
+.botao-cv:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
-.botao-cv:hover .p-button-label {
-  color: var(--text-light) !important;
-  border: none !important;
-}
-@media (max-width: 1100px) {
-  .sobre-card-img {
-    min-width: 220px;
-  }
-  .avatar-ilustra {
-    max-height: 320px;
-  }
-}
-@media (max-width: 900px) {
-  .sobre-hero {
-    min-height: unset;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+
+@media (max-width: 960px) {
   .sobre-content {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    padding: 1rem 0.5rem;
+    grid-template-columns: 1fr;
   }
-  .sobre-card-img {
-    width: 100%;
-    min-width: unset;
-  }
-  .img-card {
-    width: 100%;
-    height: auto;
-  }
+
   .avatar-ilustra {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
+    min-height: 260px;
+    max-height: 340px;
   }
+
   .sobre-info {
-    align-items: center;
     text-align: center;
-    width: 100%;
+    align-items: center;
   }
-  .descricao {
-    font-size: 1.1rem;
-  }
-  .botao-cv {
-    width: 100%;
+
+  .botoes-sociais {
     justify-content: center;
+  }
+
+  .botao-cv {
     margin-left: 0;
   }
 }
-</style> 
+
+@media (max-width: 560px) {
+  .botao-cv {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>

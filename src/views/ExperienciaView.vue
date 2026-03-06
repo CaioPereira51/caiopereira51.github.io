@@ -1,28 +1,31 @@
 <template>
-  <section aria-labelledby="experiencia-heading">
-    <h2 id="experiencia-heading" class="titulo-skills">Experiência Profissional</h2>
+  <section aria-labelledby="experiencia-heading" class="section-shell experiencia-section">
+    <SectionHeader
+      id="experiencia-heading"
+      eyebrow="Carreira"
+      title="Experiência profissional"
+      subtitle="Atuação prática com análise e desenvolvimento de sistemas focada em entrega contínua."
+    />
+
     <div class="experience-list">
-      <Card v-for="(item, index) in experiencias" :key="index" class="experience-card">
-        <template #content>
-          <div class="flex p-4">
-            <div class="company-logo-side">
-              <img :src="getLogoUrl('ws.png')" :alt="item.empresa" class="logo-img-side" loading="lazy">
-            </div>
-            <div class="flex-1 pl-5">
-              <div class="font-bold text-xl mb-3 text-white">{{ item.empresa }}</div>
-              <div class="font-bold text-lg mb-3" style="color: var(--secondary-color);">{{ item.cargo }}</div>
-              <div class="text-white line-height-3">{{ item.descricao }}</div>
-              <div class="text-white font-medium mt-3">{{ item.periodo }}</div>
-            </div>
-          </div>
-        </template>
-      </Card>
+      <article v-for="item in experiencias" :key="item.empresa" class="experience-card">
+        <div class="company-logo-side">
+          <img :src="getLogoUrl(item.logo)" :alt="`Logo da empresa ${item.empresa}`" class="logo-img-side" loading="lazy" />
+        </div>
+
+        <div class="experience-content">
+          <h3 class="company-name">{{ item.empresa }}</h3>
+          <p class="company-role">{{ item.cargo }}</p>
+          <p class="company-description">{{ item.descricao }}</p>
+          <p class="company-period">{{ item.periodo }}</p>
+        </div>
+      </article>
     </div>
   </section>
 </template>
 
 <script setup>
-import Card from 'primevue/card';
+import SectionHeader from '../components/SectionHeader.vue';
 
 const getLogoUrl = (fileName) => new URL(`../assets/empresas/${fileName}`, import.meta.url).href;
 
@@ -30,72 +33,94 @@ const experiencias = [
   {
     empresa: 'WorkingSoftware',
     cargo: 'Desenvolvedor FullStack',
-    descricao: 'Analise e Desenvolvimento de sistemas',
+    descricao:
+      'Análise e desenvolvimento de sistemas, manutenção de aplicações e evolução de soluções voltadas a desempenho e confiabilidade.',
     periodo: 'Julho de 2022 - Atualmente',
-    logo: 'ws.png'
+    logo: 'ws.png',
   },
 ];
 </script>
 
 <style scoped>
-.titulo-skills {
-  color: var(--secondary-color);
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  margin-top: 0.5rem;
+.experiencia-section {
+  width: 100%;
+  padding: clamp(1.2rem, 2.4vw, 2rem);
 }
 
 .experience-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  gap: 1rem;
 }
 
 .experience-card {
-  background: rgba(27, 42, 65, 0.92) !important;
-  color: var(--primary-color) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 2px 12px 0 #1b2a4111 !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  min-width: 700px !important;
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  background: var(--surface-panel);
+  padding: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .experience-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 20px 0 #1b2a4122 !important;
+  transform: translateY(-2px);
+  border-color: rgba(58, 134, 255, 0.62);
 }
 
 .company-logo-side {
-  flex-shrink: 0 !important;
-  width: 80px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: var(--surface-ground) !important;
-  border-radius: 8px 0 0 8px !important;
-  padding: 1rem 0.5rem !important;
+  width: 82px;
+  height: 82px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem;
 }
 
 .logo-img-side {
-  width: 140% !important;
-  height: auto !important;
-  max-height: 100px !important;
-  object-fit: contain !important;
-  margin: -20% !important;
+  width: 100%;
+  height: auto;
+  max-height: 56px;
+  object-fit: contain;
 }
 
-@media (max-width: 768px) {
+.experience-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.company-name {
+  font-size: 1.15rem;
+  color: var(--text-light);
+}
+
+.company-role {
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.company-description {
+  color: var(--text-base);
+}
+
+.company-period {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
   .experience-card {
-    min-width: auto !important;
+    grid-template-columns: 1fr;
   }
-  
+
   .company-logo-side {
-    width: 60px !important;
-  }
-  
-  .logo-img-side {
-    max-height: 50px !important;
+    width: 70px;
+    height: 70px;
   }
 }
-</style> 
+</style>
