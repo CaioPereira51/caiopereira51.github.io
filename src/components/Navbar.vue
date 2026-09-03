@@ -35,14 +35,15 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { nextTick, onMounted, onUnmounted, ref } from 'vue';
 
 const navItems = [
   { id: 1, label: 'Sobre', href: '#sobre' },
   { id: 2, label: 'Projetos', href: '#projetos' },
-  { id: 3, label: 'Skills', href: '#skills' },
-  { id: 4, label: 'Experiência', href: '#experiencia' },
+  { id: 3, label: 'Experiência', href: '#experiencia' },
+  { id: 4, label: 'Stack', href: '#stack' },
   { id: 5, label: 'Formação', href: '#formacao' },
+  { id: 6, label: 'Contato', href: '#contato' },
 ];
 
 const navRef = ref(null);
@@ -50,7 +51,7 @@ const activeSection = ref('sobre');
 const mobileMenuOpen = ref(false);
 
 function getNavbarHeight() {
-  return navRef.value?.offsetHeight ?? 96;
+  return navRef.value?.offsetHeight ?? 72;
 }
 
 function setNavigationOffset() {
@@ -80,9 +81,11 @@ function scrollToSection(href) {
   }
 }
 
-function handleNavClick(href) {
-  scrollToSection(href);
+async function handleNavClick(href) {
   mobileMenuOpen.value = false;
+  await nextTick();
+  setNavigationOffset();
+  scrollToSection(href);
 }
 
 function updateActiveSection() {
@@ -139,16 +142,15 @@ onUnmounted(() => {
   width: 100%;
   z-index: 1000;
   border-bottom: 1px solid var(--border-subtle);
-  background: rgba(4, 6, 21, 0.88);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 28px rgba(2, 8, 24, 0.28);
+  background: rgba(5, 10, 18, 0.86);
+  backdrop-filter: blur(18px);
 }
 
 .navbar-inner {
   width: min(1200px, 100%);
-  min-height: 96px;
+  min-height: 72px;
   margin: 0 auto;
-  padding: 1rem clamp(1rem, 3vw, 2.25rem);
+  padding: 0.65rem clamp(1rem, 3vw, 2.25rem);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -169,8 +171,9 @@ onUnmounted(() => {
 }
 
 .brand span {
-  font-size: clamp(1.2rem, 2vw, 1.65rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 750;
 }
 
 .menu-toggle {
@@ -211,12 +214,12 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 650;
   color: var(--text-base);
   text-decoration: none;
-  border-radius: 10px;
-  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  padding: 0.48rem 0.78rem;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
@@ -232,15 +235,15 @@ onUnmounted(() => {
 }
 
 .nav-link-active {
-  background: var(--accent-color);
-  color: var(--text-light);
+  background: var(--accent-soft);
+  color: var(--accent-color);
 }
 
 @media (max-width: 900px) {
   .navbar-inner {
-    min-height: 84px;
+    min-height: 64px;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .menu-toggle {

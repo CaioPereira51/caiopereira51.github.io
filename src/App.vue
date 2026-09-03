@@ -2,30 +2,33 @@
 import Navbar from './components/Navbar.vue'
 import SobreView from './views/SobreView.vue'
 import ProjetosView from './views/ProjetosView.vue'
-import SkillsView from './views/SkillsView.vue'
 import ExperienciaView from './views/ExperienciaView.vue'
+import SkillsView from './views/SkillsView.vue'
 import FormacaoView from './views/FormacaoView.vue'
+import ContatoView from './views/ContatoView.vue'
 </script>
 
 <template>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <Navbar />
-  <main class="app-main">
+  <main id="conteudo" class="app-main">
     <section id="sobre" class="app-section full-section"><SobreView /></section>
-    <section id="projetos" class="app-section full-section"><ProjetosView /></section>
-    <section id="skills" class="app-section full-section"><SkillsView /></section>
-    <section id="experiencia" class="app-section full-section"><ExperienciaView /></section>
-    <section id="formacao" class="app-section full-section"><FormacaoView /></section>
+    <section id="projetos" class="app-section"><ProjetosView /></section>
+    <section id="experiencia" class="app-section"><ExperienciaView /></section>
+    <section id="stack" class="app-section"><SkillsView /></section>
+    <section id="formacao" class="app-section"><FormacaoView /></section>
+    <section id="contato" class="app-section contact-section"><ContatoView /></section>
   </main>
 </template>
 
 <style scoped>
 .app-main {
-  padding-top: var(--nav-offset, 96px);
+  padding-top: var(--nav-offset, 72px);
 }
 
 .app-section {
-  padding-block: clamp(1rem, 2.5vw, 2.5rem);
-  scroll-margin-top: calc(var(--nav-offset, 96px) + 1rem);
+  padding-block: clamp(2.8rem, 7vw, 6.5rem);
+  scroll-margin-top: calc(var(--nav-offset, 72px) + 1rem);
 }
 
 .app-section > * {
@@ -34,18 +37,22 @@ import FormacaoView from './views/FormacaoView.vue'
 }
 
 .full-section {
-  min-height: calc(100vh - var(--nav-offset, 96px));
+  min-height: calc(100vh - var(--nav-offset, 72px));
   display: flex;
   align-items: center;
 }
 
+.contact-section {
+  padding-bottom: clamp(1.5rem, 4vw, 3rem);
+}
+
 @media (max-width: 900px) {
   .app-main {
-    padding-top: calc(var(--nav-offset, 84px) + 0.5rem);
+    padding-top: var(--nav-offset, 64px);
   }
 
   .app-section {
-    padding-block: 0.85rem 1.45rem;
+    padding-block: clamp(2.5rem, 10vw, 4.5rem);
   }
 
   .full-section {

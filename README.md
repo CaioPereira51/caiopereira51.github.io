@@ -4,23 +4,23 @@ Portfólio pessoal desenvolvido com Vue.js 3, Vite e PrimeVue.
 
 ## 👨‍💻 Sobre
 
-Desenvolvedor FullStack apaixonado por tecnologia, com expertise em análise e desenvolvimento de sistemas. Atualmente cursando Ciência da Computação e trabalhando na WorkingSoftware.
+Portfólio profissional de Caio Pereira, Desenvolvedor Full Stack com experiência desde 2022 na construção e evolução de aplicações web.
 
 ## 🛠️ Tecnologias
 
-- **Frontend**: Vue.js 3, Vite, PrimeVue
+- **Frontend**: Vue.js 3 e Vite
 - **Estilização**: CSS3, PrimeVue Components
 - **Ícones**: PrimeIcons, Devicon
 - **Deploy**: GitHub Pages
 
 ## 📋 Funcionalidades
 
-- **Página Sobre**: Apresentação pessoal e links sociais
-- **Skills**: Lista de tecnologias e ferramentas
-- **Experiência**: Timeline de experiências profissionais
-- **Formação**: Formação acadêmica e certificados
-- **Projetos**: Carrossel de projetos em destaque
-- **Contato**: Formulário de contato
+- **Apresentação**: Posicionamento profissional, links sociais e currículo
+- **Projetos selecionados**: Estudos de caso de MeuChat, Desafio Onfly e Git Automação
+- **Experiência**: Responsabilidades profissionais e recomendações
+- **Competências técnicas**: Stack organizada por profundidade e contexto
+- **Formação**: Trajetória acadêmica e cursos complementares
+- **Contato**: Links diretos para e-mail, LinkedIn e GitHub
 
 ## 🚀 Como executar
 
@@ -50,19 +50,12 @@ npm run build
 
 O projeto está configurado para deploy automático no GitHub Pages através do GitHub Actions.
 
-### Configuração do GitHub Pages
-
-1. Vá para **Settings** > **Pages** no seu repositório
-2. Em **Source**, selecione **Deploy from a branch**
-3. Selecione a branch **gh-pages** e pasta **/(root)**
-4. Clique em **Save**
-
-### Workflow Automático
+### Workflow automático
 
 O workflow `.github/workflows/deploy.yml` será executado automaticamente:
 - A cada push na branch `main`
 - Faz build do projeto
-- Deploy automático para GitHub Pages
+- Publica o resultado na branch `gh-pages`
 
 **URL do site**: https://caiopereira51.github.io/
 
@@ -88,10 +81,6 @@ meu-portifolio/
 - **E-mail**: dev.caiop@gmail.com
 - **WhatsApp**: (37) 99956-7472
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ---
 
-Desenvolvido com ❤️ por Caio Pereira
+Desenvolvido por Caio Pereira.

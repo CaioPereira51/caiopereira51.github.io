@@ -1,18 +1,24 @@
 :root {
-  --primary-color: #040615;
-  --secondary-color: #eaeaea;
-  --accent-color: #3a86ff;
-  --accent-color-strong: #265bc9;
-  --text-light: #ffffff;
-  --text-base: #dce3f4;
-  --text-muted: #a0aec8;
-  --surface-panel: rgba(15, 24, 42, 0.78);
-  --surface-elevated: rgba(27, 42, 65, 0.92);
-  --surface-overlay: rgba(8, 14, 28, 0.97);
-  --border-subtle: rgba(140, 167, 219, 0.26);
-  --border-radius: 16px;
-  --card-shadow: 0 14px 36px rgba(2, 8, 24, 0.3);
-  --nav-offset: 96px;
+  --primary-color: #050a12;
+  --secondary-color: #e8f1f2;
+  --accent-color: #18cad5;
+  --accent-color-strong: #0daab4;
+  --accent-soft: rgba(24, 202, 213, 0.12);
+  --signal-color: #5de6b8;
+  --text-light: #f3f7f7;
+  --text-base: #c6d0d2;
+  --text-muted: #849398;
+  --surface-panel: rgba(10, 20, 31, 0.74);
+  --surface-elevated: rgba(8, 17, 27, 0.8);
+  --surface-overlay: rgba(5, 10, 18, 0.98);
+  --border-subtle: rgba(152, 193, 198, 0.18);
+  --border-strong: rgba(152, 225, 230, 0.38);
+  --border-radius: 4px;
+  --card-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  --nav-offset: 72px;
+  --font-display: 'Bricolage Grotesque', 'Aptos Display', sans-serif;
+  --font-body: 'Manrope', 'Aptos', sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
 
 *,
@@ -37,11 +43,13 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 12% 8%, rgba(58, 134, 255, 0.2), transparent 45%),
-    radial-gradient(circle at 88% 12%, rgba(95, 175, 255, 0.18), transparent 36%),
-    linear-gradient(180deg, #040615 0%, #060a1b 58%, #040615 100%);
+    linear-gradient(rgba(152, 193, 198, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(152, 193, 198, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 84% 8%, rgba(24, 202, 213, 0.1), transparent 34%),
+    linear-gradient(180deg, #050a12 0%, #07101a 54%, #050a12 100%);
+  background-size: 48px 48px, 48px 48px, auto, auto;
   color: var(--text-base);
-  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.6;
   text-rendering: optimizeLegibility;
 }
@@ -66,10 +74,7 @@ h6 {
 }
 
 .section-shell {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--border-radius);
-  box-shadow: var(--card-shadow);
+  width: 100%;
 }
 
 .section-heading {
@@ -82,15 +87,19 @@ h6 {
   gap: 0.5rem;
   margin-bottom: 0.4rem;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
-  font-size: 0.76rem;
-  font-weight: 600;
+  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
   color: var(--accent-color);
 }
 
 .section-title {
-  font-size: clamp(1.7rem, 3.8vw, 2.65rem);
-  font-weight: 700;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.4rem);
+  font-weight: 680;
+  letter-spacing: -0.05em;
   color: var(--text-light);
 }
 
@@ -98,6 +107,25 @@ h6 {
   margin-top: 0.65rem;
   max-width: 62ch;
   color: var(--text-muted);
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2000;
+  padding: 0.65rem 0.85rem;
+  border-radius: 4px;
+  background: var(--accent-color);
+  color: #041019;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .surface-card,
@@ -143,10 +171,25 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(58, 134, 255, 0.55);
+  background: rgba(24, 202, 213, 0.55);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(4, 6, 21, 0.9);
+  background: rgba(5, 10, 18, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

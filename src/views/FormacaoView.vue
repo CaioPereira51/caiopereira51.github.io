@@ -3,8 +3,8 @@
     <SectionHeader
       id="formacao-heading"
       eyebrow="Formação"
-      title="Formação acadêmica"
-      subtitle="Base sólida em ciência da computação e aprendizado contínuo com cursos práticos."
+      title="Trajetória acadêmica e aprendizado contínuo"
+      subtitle="Ciência da Computação como base; cursos complementares como registro da evolução técnica."
     />
 
     <div class="formation-list">
@@ -26,73 +26,31 @@
     </div>
 
     <div class="certificates-head">
-      <h3 id="certificacoes-heading" class="section-title certificates-title">Certificações e cursos</h3>
-      <p class="section-subtitle">Alguns certificados recentes que reforçam minha evolução técnica.</p>
+      <h3 id="certificacoes-heading" class="section-title certificates-title">Formação complementar</h3>
+      <p class="section-subtitle">Cursos selecionados, apresentados sem competir com a experiência profissional.</p>
     </div>
 
-    <div class="carousel-container" aria-labelledby="certificacoes-heading">
-      <Carousel
-        v-if="certificados.length > 0"
-        :value="certificados"
-        :numVisible="3"
-        :numScroll="1"
-        :responsiveOptions="responsiveOptions"
-        circular
-        :autoplayInterval="7000"
-        class="certificates-carousel"
-      >
-        <template #item="slotProps">
-          <article class="certificate-card">
-            <img
-              :src="getCertificateImageUrl(slotProps.data.image)"
-              :alt="`Prévia do certificado ${slotProps.data.name}`"
-              class="certificate-image"
-              loading="lazy"
-              @error="handleImageError"
-            />
-            <h4 class="certificate-title">{{ slotProps.data.name }}</h4>
-            <a
-              :href="getCertificatePdfUrl(slotProps.data.pdf)"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certificate-link"
-            >
-              Abrir certificado
-            </a>
-          </article>
-        </template>
-      </Carousel>
-
-      <p v-else class="loading-certificates">Carregando certificados...</p>
-    </div>
+    <ul class="course-list" aria-labelledby="certificacoes-heading">
+      <li v-for="certificate in certificados" :key="certificate.name">
+        <div>
+          <span>{{ certificate.provider }}</span>
+          <h4>{{ certificate.name }}</h4>
+        </div>
+        <a :href="getCertificatePdfUrl(certificate.pdf)" target="_blank" rel="noopener noreferrer">
+          Ver certificado
+          <i class="pi pi-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script setup>
-import Carousel from 'primevue/carousel';
-import { onMounted, ref } from 'vue';
 import SectionHeader from '../components/SectionHeader.vue';
 
 const getLogoUrlAcademica = (fileName) => new URL(`../assets/faculdades/${fileName}`, import.meta.url).href;
-const getCertificateImageUrl = (fileName) =>
-  new URL(`../assets/certificados/${fileName}`, import.meta.url).href;
 const getCertificatePdfUrl = (fileName) =>
   new URL(`../assets/certificados/${fileName}`, import.meta.url).href;
-
-const certificados = ref([]);
-
-const responsiveOptions = [
-  {
-    breakpoint: '1200px',
-    numVisible: 2,
-    numScroll: 1,
-  },
-  {
-    breakpoint: '820px',
-    numVisible: 1,
-    numScroll: 1,
-  },
-];
 
 const experienciasAcademicas = [
   {
@@ -109,43 +67,33 @@ const experienciasAcademicas = [
   },
 ];
 
-const loadCertificates = () => {
-  certificados.value = [
-    {
-      image: 'Caio Pereira dos Santos - Curso Avançando com PHP_ Arrays, Strings, Função e Web - Alura_page-0001.jpg',
-      pdf: 'Caio Pereira dos Santos - Curso Avançando com PHP_ Arrays, Strings, Função e Web - Alura.pdf',
-      name: 'Curso Avançando com PHP: Arrays, Strings, Função e Web - Alura',
-    },
-    {
-      image: 'Caio Pereira dos Santos - Curso Bootstrap5_ crie uma landing page responsiva - Alura_page-0001.jpg',
-      pdf: 'Caio Pereira dos Santos - Curso Bootstrap5_ crie uma landing page responsiva - Alura.pdf',
-      name: 'Curso Bootstrap5: Crie uma landing page responsiva - Alura',
-    },
-    {
-      image: 'Caio Pereira dos Santos - Curso Git e Github_ controle e compartilhe seu código - Alura_page-0001.jpg',
-      pdf: 'Caio Pereira dos Santos - Curso Git e Github_ controle e compartilhe seu código - Alura.pdf',
-      name: 'Curso Git e Github: Controle e compartilhe seu código - Alura',
-    },
-    {
-      image: 'Caio Pereira dos Santos - Curso PHP_ conceitos, lidando com dados, loops e mais - Alura_page-0001.jpg',
-      pdf: 'Caio Pereira dos Santos - Curso PHP_ conceitos, lidando com dados, loops e mais - Alura.pdf',
-      name: 'Curso PHP: Conceitos, lidando com dados, loops e mais - Alura',
-    },
-    {
-      image: 'Caio Pereira dos Santos - Formação em Conectar_page-0001.jpg',
-      pdf: 'Caio Pereira dos Santos - Formação em Conectar.pdf',
-      name: 'Formação em Conectar',
-    },
-  ];
-};
-
-function handleImageError(event) {
-  event.target.src = '/programmer-icon.svg';
-}
-
-onMounted(() => {
-  loadCertificates();
-});
+const certificados = [
+  {
+    pdf: 'Caio Pereira dos Santos - Curso Avançando com PHP_ Arrays, Strings, Função e Web - Alura.pdf',
+    name: 'Avançando com PHP: Arrays, Strings, Funções e Web',
+    provider: 'Alura',
+  },
+  {
+    pdf: 'Caio Pereira dos Santos - Curso Bootstrap5_ crie uma landing page responsiva - Alura.pdf',
+    name: 'Bootstrap 5: landing page responsiva',
+    provider: 'Alura',
+  },
+  {
+    pdf: 'Caio Pereira dos Santos - Curso Git e Github_ controle e compartilhe seu código - Alura.pdf',
+    name: 'Git e GitHub: controle e compartilhamento de código',
+    provider: 'Alura',
+  },
+  {
+    pdf: 'Caio Pereira dos Santos - Curso PHP_ conceitos, lidando com dados, loops e mais - Alura.pdf',
+    name: 'PHP: conceitos, dados e estruturas de controle',
+    provider: 'Alura',
+  },
+  {
+    pdf: 'Caio Pereira dos Santos - Formação em Conectar.pdf',
+    name: 'Formação em Conectar',
+    provider: 'Formação complementar',
+  },
+];
 </script>
 
 <style scoped>
@@ -224,100 +172,51 @@ onMounted(() => {
   font-size: clamp(1.5rem, 2.8vw, 2rem);
 }
 
-.carousel-container {
-  overflow: hidden;
+.course-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border-subtle);
+  list-style: none;
 }
 
-.certificate-card {
-  height: 100%;
-  margin: 0.35rem;
-  padding: 0.9rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
-  background: var(--surface-panel);
+.course-list li {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-.certificate-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(58, 134, 255, 0.62);
+.course-list span {
+  color: var(--accent-color);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
-.certificate-image {
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
-  border-radius: 10px;
+.course-list h4 {
+  margin-top: 0.18rem;
+  font-size: 0.94rem;
 }
 
-.certificate-title {
-  font-size: 0.95rem;
-  color: var(--text-light);
-  line-height: 1.35;
-}
-
-.certificate-link {
+.course-list a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  align-self: flex-start;
-  border: 1px solid var(--accent-color);
-  border-radius: 8px;
-  padding: 0.45rem 0.72rem;
-  color: var(--text-light);
-  background: rgba(58, 134, 255, 0.18);
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.certificate-link:hover {
-  transform: translateY(-1px);
-  background: var(--accent-color);
-}
-
-.certificate-link:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-.loading-certificates {
+  gap: 0.4rem;
   color: var(--text-muted);
-  padding: 1rem 0;
+  text-decoration: none;
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
-:deep(.p-carousel-indicator) {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(160, 174, 200, 0.5);
+.course-list a:hover {
+  color: var(--accent-color);
 }
 
-:deep(.p-carousel-indicator.p-highlight) {
-  background: var(--accent-color);
-}
-
-:deep(.p-carousel-prev-button),
-:deep(.p-carousel-next-button) {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1px solid var(--accent-color);
-  color: var(--text-light);
-  background: rgba(58, 134, 255, 0.22);
-}
-
-:deep(.p-carousel-prev-button:hover),
-:deep(.p-carousel-next-button:hover) {
-  background: var(--accent-color);
-}
-
-:deep(.p-carousel-prev-button:focus-visible),
-:deep(.p-carousel-next-button:focus-visible) {
+.course-list a:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
@@ -332,8 +231,9 @@ onMounted(() => {
     height: 70px;
   }
 
-  .certificate-image {
-    height: 160px;
+  .course-list li {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 </style>

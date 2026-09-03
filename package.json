@@ -9,10 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@primevue/themes": "^4.3.6",
-    "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
-    "primevue": "^4.3.6",
     "vue": "^3.4.21"
   },
   "devDependencies": {

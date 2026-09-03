@@ -1,58 +1,86 @@
 <template>
   <section class="sobre-hero" aria-labelledby="sobre-nome">
-    <article class="sobre-content section-shell">
-      <div class="sobre-card-img">
-        <img
-          src="/programador.png"
-          alt="Ilustração de desenvolvedor em ambiente de programação"
-          class="avatar-ilustra"
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
-
+    <article class="sobre-content">
       <div class="sobre-info">
-        <p class="sobre-kicker">Desenvolvedor FullStack</p>
-        <h1 id="sobre-nome" class="sobre-titulo">Caio Pereira</h1>
-        <p class="sobre-subtitulo">Construo soluções web com foco em qualidade, clareza e resultado.</p>
+        <p class="sobre-kicker"><span aria-hidden="true"></span> Disponível para novos desafios</p>
+        <h1 id="sobre-nome" class="sobre-titulo">
+          Caio Pereira,
+          <strong>Desenvolvedor Full Stack.</strong>
+        </h1>
+        <p class="sobre-subtitulo">
+          Experiência profissional desde 2022 na construção e evolução de aplicações web.
+        </p>
         <p class="descricao">
-          Sou programador full stack apaixonado por tecnologia e especializado em análise e desenvolvimento
-          de sistemas. Tenho experiência na criação de soluções eficientes, unindo visão técnica, foco no
-          usuário e melhoria contínua para entregar valor real ao negócio.
+          Atuo de ponta a ponta com Vue.js, Laravel, .NET e MySQL. Fora do trabalho, desenvolvo
+          produtos que exploram aplicações desktop, IA local, APIs e automação de entrega.
         </p>
 
-        <div class="botoes-sociais">
-          <a
-            v-for="link in socialLinks"
-            :key="link.label"
-            :href="link.href"
-            class="social-btn"
-            :target="link.target"
-            :rel="link.target === '_blank' ? 'noopener noreferrer' : undefined"
-            :aria-label="link.label"
-          >
-            <i :class="link.icon" aria-hidden="true"></i>
-            <span class="sr-only">{{ link.label }}</span>
+        <div class="hero-actions">
+          <a href="#projetos" class="primary-action">
+            Ver projetos
+            <i class="pi pi-arrow-down" aria-hidden="true"></i>
           </a>
-
-          <a
-            :href="curriculoUrl"
-            class="botao-cv"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Baixar currículo em PDF"
-          >
-            <span>Baixar Currículo</span>
-            <i class="pi pi-download" aria-hidden="true"></i>
+          <a href="#contato" class="secondary-action">
+            Entrar em contato
+          </a>
+          <a href="/curriculo.pdf" class="text-action" target="_blank" rel="noopener noreferrer">
+            Ver currículo
+            <i class="pi pi-external-link" aria-hidden="true"></i>
           </a>
         </div>
+
+        <ul class="social-list" aria-label="Perfis e contato">
+          <li v-for="link in socialLinks" :key="link.label">
+            <a
+              :href="link.href"
+              :target="link.target"
+              :rel="link.target === '_blank' ? 'noopener noreferrer' : undefined"
+            >
+              <i :class="link.icon" aria-hidden="true"></i>
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
       </div>
+
+      <aside class="hero-proof" aria-label="Resumo da atuação técnica">
+        <div class="proof-topbar">
+          <span>caio.build</span>
+          <span class="proof-status"><i aria-hidden="true"></i> em evolução</span>
+        </div>
+        <div class="proof-body">
+          <p class="proof-label">Construindo agora</p>
+          <h2>Produtos completos,<br />da interface à entrega.</h2>
+          <div class="architecture-flow" aria-label="Fluxo de competências">
+            <div>
+              <span>01</span>
+              <strong>Interface</strong>
+              <small>Vue · React</small>
+            </div>
+            <i class="pi pi-arrow-right" aria-hidden="true"></i>
+            <div>
+              <span>02</span>
+              <strong>Aplicação</strong>
+              <small>Laravel · .NET</small>
+            </div>
+            <i class="pi pi-arrow-right" aria-hidden="true"></i>
+            <div>
+              <span>03</span>
+              <strong>Entrega</strong>
+              <small>Docker · CI/CD</small>
+            </div>
+          </div>
+          <div class="proof-footer">
+            <span>WorkingSoftware</span>
+            <span>desde 2022</span>
+          </div>
+        </div>
+      </aside>
     </article>
   </section>
 </template>
 
 <script setup>
-import curriculoUrl from '../assets/Caio_Pereira_programador_2025.pdf';
 import { useSocialLinks } from '../composables/useSocialLinks';
 
 const { getEmailUrl, getGitHubUrl, getLinkedInUrl, getWhatsAppUrl } = useSocialLinks();
@@ -72,26 +100,11 @@ const socialLinks = [
 
 .sobre-content {
   display: grid;
-  grid-template-columns: minmax(260px, 38%) 1fr;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: clamp(2.5rem, 6vw, 6.5rem);
   align-items: center;
   width: min(1120px, 100%);
-  padding: clamp(1.25rem, 2.4vw, 2.4rem);
-}
-
-.sobre-card-img {
-  min-height: 100%;
-}
-
-.avatar-ilustra {
-  width: 100%;
-  height: 100%;
-  min-height: 320px;
-  max-height: 520px;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 12px 24px rgba(6, 10, 26, 0.28);
+  padding: clamp(1rem, 2vw, 2rem);
 }
 
 .sobre-info {
@@ -101,89 +114,242 @@ const socialLinks = [
 }
 
 .sobre-kicker {
-  color: var(--accent-color);
-  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
-.sobre-titulo {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-}
-
-.sobre-subtitulo {
-  font-size: clamp(1.08rem, 2.4vw, 1.35rem);
-  color: var(--secondary-color);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 500;
 }
 
-.descricao {
-  max-width: 62ch;
-  color: var(--text-base);
-  font-size: clamp(1rem, 1.7vw, 1.08rem);
+.sobre-kicker span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal-color);
+  box-shadow: 0 0 0 5px rgba(93, 230, 184, 0.1);
 }
 
-.botoes-sociais {
+.sobre-titulo {
+  max-width: 13ch;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 450;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.sobre-titulo strong {
+  color: var(--accent-color);
+  font-weight: 750;
+}
+
+.sobre-subtitulo {
+  max-width: 52ch;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  color: var(--text-light);
+  font-weight: 550;
+  line-height: 1.35;
+}
+
+.descricao {
+  max-width: 58ch;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
   align-items: center;
-  margin-top: 0.55rem;
+  margin-top: 0.8rem;
 }
 
-.social-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-subtle);
-  color: var(--text-light);
-  background: rgba(58, 134, 255, 0.2);
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.social-btn:hover {
-  transform: translateY(-2px);
-  background: var(--accent-color);
-}
-
-.social-btn:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-.social-btn i {
-  font-size: 1.2rem;
-}
-
-.botao-cv {
-  margin-left: 0.15rem;
+.primary-action,
+.secondary-action,
+.text-action {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  background: var(--accent-color);
-  color: var(--text-light);
-  border: 1px solid var(--accent-color);
-  border-radius: 10px;
-  padding: 0.7rem 1rem;
+  justify-content: center;
   text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.botao-cv:hover {
+.primary-action,
+.secondary-action {
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+}
+
+.primary-action {
+  color: #041019;
+  background: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.secondary-action {
+  color: var(--text-light);
+  border: 1px solid var(--border-strong);
+}
+
+.text-action {
+  color: var(--text-muted);
+  padding: 0.6rem 0.25rem;
+}
+
+.primary-action:hover,
+.secondary-action:hover,
+.text-action:hover {
   transform: translateY(-2px);
-  background: var(--accent-color-strong);
 }
 
-.botao-cv:focus-visible {
+.secondary-action:hover {
+  border-color: var(--accent-color);
+}
+
+.primary-action:focus-visible,
+.secondary-action:focus-visible,
+.text-action:focus-visible,
+.social-list a:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
+}
+
+.social-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.55rem 0 0;
+}
+
+.social-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  transition: color 0.2s ease;
+}
+
+.social-list a:hover {
+  color: var(--accent-color);
+}
+
+.hero-proof {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: rgba(10, 20, 31, 0.82);
+  box-shadow: 28px 28px 0 rgba(24, 202, 213, 0.06);
+  transform: rotate(1.2deg);
+}
+
+.hero-proof::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 28px;
+}
+
+.proof-topbar,
+.proof-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.proof-topbar {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.proof-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.proof-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--signal-color);
+}
+
+.proof-body {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.5rem, 4vw, 2.8rem);
+}
+
+.proof-label {
+  color: var(--accent-color);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.proof-body h2 {
+  margin-top: 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.architecture-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 2.4rem 0;
+}
+
+.architecture-flow > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.architecture-flow span,
+.architecture-flow small {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.architecture-flow strong {
+  color: var(--text-light);
+  font-size: 0.82rem;
+}
+
+.architecture-flow > i {
+  color: var(--accent-color);
+  font-size: 0.68rem;
+}
+
+.proof-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 @media (max-width: 960px) {
@@ -191,29 +357,27 @@ const socialLinks = [
     grid-template-columns: 1fr;
   }
 
-  .avatar-ilustra {
-    min-height: 260px;
-    max-height: 340px;
-  }
-
   .sobre-info {
-    text-align: center;
-    align-items: center;
-  }
-
-  .botoes-sociais {
-    justify-content: center;
-  }
-
-  .botao-cv {
-    margin-left: 0;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 560px) {
-  .botao-cv {
+  .primary-action,
+  .secondary-action {
     width: 100%;
-    justify-content: center;
+  }
+
+  .hero-proof {
+    transform: none;
+  }
+
+  .architecture-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-flow > i {
+    transform: rotate(90deg);
   }
 }
 </style>
