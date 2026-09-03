@@ -74,7 +74,11 @@ function scrollToSection(href) {
 
   const topOffset = getNavbarHeight() + 16;
   const targetPosition = element.getBoundingClientRect().top + window.scrollY - topOffset;
-  window.scrollTo({ top: Math.max(targetPosition, 0), behavior: 'smooth' });
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({
+    top: Math.max(targetPosition, 0),
+    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+  });
 
   if (window.history?.replaceState) {
     window.history.replaceState(null, '', href);
